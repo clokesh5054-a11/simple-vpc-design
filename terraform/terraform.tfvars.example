@@ -1,0 +1,10 @@
+# Example variable overrides. Copy this file to terraform.tfvars and customize.
+
+aws_region          = "us-east-1"
+vpc_cidr            = "10.0.0.0/16"
+public_subnet_cidr  = "10.0.1.0/24"
+private_subnet_cidr = "10.0.2.0/24"
+allowed_ssh_ip      = "203.0.113.50/32" # Replace with your actual public IP address (use curl checkip.amazonaws.com)
+instance_type       = "t2.micro"
+project_name        = "simple-vpc-design"
+environment         = "Dev"

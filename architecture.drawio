@@ -1,0 +1,86 @@
+<mxfile host="65bd7114-4a7b-47e8-8b21-de6cd10e2b44" modified="2026-07-25T12:00:00.000Z" agent="Antigravity" version="21.6.8" type="device">
+  <diagram id="vpc-design" name="Page-1">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Internet (Cloud) -->
+        <mxCell id="internet" value="Internet" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontColor=#0369a1;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="390" y="30" width="120" height="70" as="geometry" />
+        </mxCell>
+        
+        <!-- Internet Gateway (IGW) -->
+        <mxCell id="igw" value="Internet Gateway&#xa;(IGW)" style="ellipse;shape=mxgraph.aws4.internet_gateway;whiteSpace=wrap;html=1;fillColor=#fff7ed;strokeColor=#ea580c;fontColor=#ea580c;fontStyle=1;verticalAlign=bottom;labelPosition=center;verticalLabelPosition=top" vertex="1" parent="1">
+          <mxGeometry x="420" y="210" width="60" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- VPC Container -->
+        <mxCell id="vpc" value="AWS VPC (10.0.0.0/16)" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#f97316;strokeWidth=2;dashed=1;fontColor=#ea580c;align=left;verticalAlign=top;spacingLeft=10;spacingTop=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="50" y="240" width="800" height="420" as="geometry" />
+        </mxCell>
+        
+        <!-- Public Subnet -->
+        <mxCell id="public_subnet" value="Public Subnet (10.0.1.0/24)" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;fillColor=#f0f7ff;strokeColor=#2563eb;strokeWidth=2;fontColor=#1d4ed8;align=left;verticalAlign=top;spacingLeft=10;spacingTop=10;fontStyle=1" vertex="1" parent="vpc">
+          <mxGeometry x="30" y="60" width="360" height="340" as="geometry" />
+        </mxCell>
+        
+        <!-- Private Subnet -->
+        <mxCell id="private_subnet" value="Private Subnet (10.0.2.0/24)" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;fillColor=#f0fdf4;strokeColor=#16a34a;strokeWidth=2;fontColor=#15803d;align=left;verticalAlign=top;spacingLeft=10;spacingTop=10;fontStyle=1" vertex="1" parent="vpc">
+          <mxGeometry x="410" y="60" width="360" height="340" as="geometry" />
+        </mxCell>
+
+        <!-- Public Route Table -->
+        <mxCell id="public_rt" value="Public Route Table&#xa;(0.0.0.0/0 -> IGW)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fffbeb;strokeColor=#d97706;fontColor=#b45309;fontStyle=1;fontSize=11" vertex="1" parent="public_subnet">
+          <mxGeometry x="20" y="40" width="320" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Web SG -->
+        <mxCell id="web_sg" value="Security Group: Web SG&#xa;(SSH: 22, HTTP: 80, HTTPS: 443)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fafafa;strokeColor=#64748b;dashed=1;fontColor=#334155;align=center;verticalAlign=top;spacingTop=5;fontSize=11" vertex="1" parent="public_subnet">
+          <mxGeometry x="20" y="115" width="320" height="205" as="geometry" />
+        </mxCell>
+
+        <!-- Web EC2 Instance -->
+        <mxCell id="web_ec2" value="EC2 Web Server&#xa;(Amazon Linux 2023)" style="shape=mxgraph.aws4.ec2;whiteSpace=wrap;html=1;fillColor=#f97316;strokeColor=#ea580c;fontColor=#ffffff;fontStyle=1;align=center;verticalAlign=bottom;labelPosition=center;verticalLabelPosition=top" vertex="1" parent="web_sg">
+          <mxGeometry x="70" y="90" width="180" height="95" as="geometry" />
+        </mxCell>
+
+        <!-- App SG -->
+        <mxCell id="app_sg" value="Security Group: App SG&#xa;(Traffic only from Web SG)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fafafa;strokeColor=#64748b;dashed=1;fontColor=#334155;align=center;verticalAlign=top;spacingTop=5;fontSize=11" vertex="1" parent="private_subnet">
+          <mxGeometry x="20" y="115" width="320" height="205" as="geometry" />
+        </mxCell>
+
+        <!-- App EC2 Instance -->
+        <mxCell id="app_ec2" value="EC2 App Server&#xa;(Amazon Linux 2023)" style="shape=mxgraph.aws4.ec2;whiteSpace=wrap;html=1;fillColor=#f97316;strokeColor=#ea580c;fontColor=#ffffff;fontStyle=1;align=center;verticalAlign=bottom;labelPosition=center;verticalLabelPosition=top" vertex="1" parent="app_sg">
+          <mxGeometry x="70" y="90" width="180" height="95" as="geometry" />
+        </mxCell>
+
+        <!-- Connections/Arrows -->
+        
+        <!-- Internet -> IGW -->
+        <mxCell id="edge1" value="User Access" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#4B5563;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontColor=#4B5563;fontStyle=1" edge="1" parent="1" source="internet" target="igw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- IGW -> Public Route Table -->
+        <mxCell id="edge2" value="Route default (0.0.0.0/0)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#ea580c;entryX=0.5;entryY=0;exitX=0.5;exitY=1;fontColor=#ea580c;fontStyle=1" edge="1" parent="1" source="igw" target="public_rt">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="450" y="270" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Public RT -> Web Server -->
+        <mxCell id="edge3" value="HTTP/HTTPS/SSH" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#2563eb;entryX=0.5;entryY=0;exitX=0.5;exitY=1;fontColor=#2563eb;fontStyle=1" edge="1" parent="1" source="public_rt" target="web_ec2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Web Server -> App Server -->
+        <mxCell id="edge4" value="TCP (App Traffic)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2.5;strokeColor=#2563eb;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontColor=#2563eb;fontStyle=1" edge="1" parent="1" source="web_ec2" target="app_ec2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="552" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

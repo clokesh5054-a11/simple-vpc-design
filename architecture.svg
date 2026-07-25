@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" width="100%" height="100%">
+  <defs>
+    <!-- Arrow definitions -->
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#4b5563" />
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#ea580c" />
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#2563eb" />
+    </marker>
+    
+    <!-- Soft shadow filter for modern UI feel -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <filter id="card-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.05" />
+    </filter>
+  </defs>
+
+  <style>
+    .text-title { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-weight: 700; font-size: 16px; }
+    .text-body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-weight: 400; font-size: 12px; }
+    .text-body-bold { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-weight: 600; font-size: 12px; }
+    .text-server { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-weight: 700; font-size: 13px; fill: #ffffff; }
+    .text-server-sub { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-weight: 400; font-size: 11px; fill: #f1f5f9; }
+    .text-server-tag { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-weight: 600; font-size: 10px; fill: #ffedd5; }
+  </style>
+
+  <!-- Background -->
+  <rect width="900" height="700" fill="#f8fafc" rx="16" />
+
+  <!-- INTERNET -->
+  <!-- Cloud Icon Drawing -->
+  <path d="M 420 80 A 20 20 0 0 1 435 50 A 30 30 0 0 1 485 55 A 20 20 0 0 1 500 80 A 15 15 0 0 1 490 100 L 410 100 A 15 15 0 0 1 420 80 Z" 
+        fill="#e0f2fe" stroke="#0284c7" stroke-width="2" filter="url(#shadow)" />
+  <text x="450" y="88" class="text-body-bold" fill="#0369a1" text-anchor="middle">Internet</text>
+
+  <!-- VPC CONTAINER -->
+  <rect x="50" y="240" width="800" height="420" rx="12" fill="#ffffff" stroke="#f97316" stroke-width="2.5" stroke-dasharray="10 6" filter="url(#shadow)" />
+  <text x="70" y="270" class="text-title" fill="#ea580c">AWS VPC (10.0.0.0/16)</text>
+
+  <!-- INTERNET GATEWAY (IGW) -->
+  <!-- Centered on the top boundary of VPC -->
+  <circle cx="450" cy="240" r="26" fill="#fff7ed" stroke="#ea580c" stroke-width="2.5" filter="url(#card-shadow)" />
+  <!-- Portal/Gateway Vector Icon -->
+  <rect x="438" y="228" width="24" height="24" rx="4" fill="none" stroke="#ea580c" stroke-width="2" />
+  <path d="M 450 224 L 450 256 M 436 240 L 464 240" stroke="#ea580c" stroke-width="2" />
+  <text x="450" y="200" class="text-body-bold" fill="#ea580c" text-anchor="middle">Internet Gateway (IGW)</text>
+
+  <!-- PUBLIC SUBNET -->
+  <rect x="80" y="300" width="360" height="340" rx="8" fill="#f0f7ff" stroke="#2563eb" stroke-width="2" filter="url(#card-shadow)" />
+  <text x="100" y="325" class="text-body-bold" fill="#1d4ed8">Public Subnet (10.0.1.0/24)</text>
+
+  <!-- PRIVATE SUBNET -->
+  <rect x="460" y="300" width="360" height="340" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" filter="url(#card-shadow)" />
+  <text x="480" y="325" class="text-body-bold" fill="#15803d">Private Subnet (10.0.2.0/24)</text>
+
+  <!-- PUBLIC ROUTE TABLE -->
+  <rect x="100" y="340" width="320" height="55" rx="6" fill="#fffbeb" stroke="#d97706" stroke-width="1.5" />
+  <text x="115" y="360" class="text-body-bold" fill="#b45309">Public Route Table</text>
+  <text x="115" y="380" class="text-body" fill="#78350f">Destination: 0.0.0.0/0 ➔ Target: IGW</text>
+
+  <!-- SECURITY GROUP - WEB SERVER -->
+  <rect x="100" y="415" width="320" height="205" rx="6" fill="#fafafa" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 4" />
+  <text x="115" y="435" class="text-body-bold" fill="#334155">Security Group: Web Server SG</text>
+  <text x="115" y="455" class="text-body" fill="#475569">• Ingress: SSH (Port 22) from User IP</text>
+  <text x="115" y="472" class="text-body" fill="#475569">• Ingress: HTTP (Port 80) from Anywhere (0.0.0.0/0)</text>
+  <text x="115" y="489" class="text-body" fill="#475569">• Ingress: HTTPS (Port 443) from Anywhere (0.0.0.0/0)</text>
+
+  <!-- WEB EC2 INSTANCE -->
+  <rect x="170" y="505" width="180" height="95" rx="8" fill="#f97316" stroke="#ea580c" stroke-width="2" filter="url(#shadow)" />
+  <!-- Simple Stylized EC2 Icon Details -->
+  <rect x="182" y="517" width="22" height="22" rx="4" fill="none" stroke="#ffffff" stroke-width="1.8" />
+  <path d="M 188 528 L 198 528 M 193 523 L 193 533" stroke="#ffffff" stroke-width="1.5" />
+  <text x="260" y="533" class="text-server" text-anchor="middle">EC2 Web Server</text>
+  <text x="260" y="555" class="text-server-sub" text-anchor="middle">10.0.1.x (Public IP)</text>
+  <text x="260" y="575" class="text-server-tag" text-anchor="middle">Amazon Linux 2023</text>
+
+  <!-- SECURITY GROUP - APP SERVER -->
+  <rect x="480" y="415" width="320" height="205" rx="6" fill="#fafafa" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 4" />
+  <text x="495" y="435" class="text-body-bold" fill="#334155">Security Group: App Server SG</text>
+  <text x="495" y="455" class="text-body" fill="#475569">• Ingress: TCP (All Ports) from Web SG</text>
+  <text x="495" y="472" class="text-body" fill="#475569">• Ingress: Block all direct traffic from Internet</text>
+
+  <!-- APP EC2 INSTANCE -->
+  <rect x="550" y="505" width="180" height="95" rx="8" fill="#f97316" stroke="#ea580c" stroke-width="2" filter="url(#shadow)" />
+  <!-- Simple Stylized EC2 Icon Details -->
+  <rect x="562" y="517" width="22" height="22" rx="4" fill="none" stroke="#ffffff" stroke-width="1.8" />
+  <path d="M 568 528 L 578 528 M 573 523 L 573 533" stroke="#ffffff" stroke-width="1.5" />
+  <text x="640" y="533" class="text-server" text-anchor="middle">EC2 App Server</text>
+  <text x="640" y="555" class="text-server-sub" text-anchor="middle">10.0.2.x (Private IP)</text>
+  <text x="640" y="575" class="text-server-tag" text-anchor="middle">Amazon Linux 2023</text>
+
+  <!-- CONNECTIVITY ARROWS -->
+
+  <!-- Internet -> IGW -->
+  <path d="M 450 105 L 450 206" stroke="#4b5563" stroke-width="2" fill="none" marker-end="url(#arrow-gray)" />
+  <text x="460" y="145" class="text-body-bold" fill="#4b5563">User Access</text>
+
+  <!-- IGW -> Public Route Table -->
+  <path d="M 450 270 L 450 285 L 260 285 L 260 332" stroke="#ea580c" stroke-width="2" fill="none" marker-end="url(#arrow-orange)" />
+  <text x="350" y="280" class="text-body-bold" fill="#ea580c">Route default (0.0.0.0/0)</text>
+
+  <!-- Public RT -> Web Server SG / EC2 -->
+  <path d="M 260 397 L 260 497" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#arrow-blue)" />
+  <text x="268" y="408" class="text-body-bold" fill="#2563eb">HTTP/HTTPS/SSH</text>
+
+  <!-- Web Server -> App Server -->
+  <path d="M 353 552 L 542 552" stroke="#2563eb" stroke-width="2.5" fill="none" marker-end="url(#arrow-blue)" />
+  <text x="450" y="542" class="text-body-bold" fill="#2563eb" text-anchor="middle">TCP (Application Traffic)</text>
+
+</svg>

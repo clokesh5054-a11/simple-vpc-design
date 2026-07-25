@@ -1,0 +1,33 @@
+# Local directory for Terraform
+.terraform/
+
+# TFState files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+crash.log.*
+
+# Override files
+override.tf
+override.tf.json
+_override.tf
+_override.tf.json
+
+# Include lock file
+# .terraform.lock.hcl
+
+# Terraform variables file (contains sensitive credentials/keys)
+terraform.tfvars
+terraform.tfvars.json
+
+# Local Python files / caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
